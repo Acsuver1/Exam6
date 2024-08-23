@@ -7,13 +7,15 @@ const Login = lazy(() => import('../routes/Login'))
 const Single = lazy(() => import('../routes/Single'))
 const Collection = lazy(() => import('../routes/Collection'))
 import Nav from '../components/Nav/Nav'
+import { useLocation } from 'react-router-dom'
 
 
 const RouteController = () => {
-  
+  const location = useLocation();
+    const hideNavOnPaths = ["/login"];
   return (
    <>
-    <Nav />
+    {!hideNavOnPaths.includes(location.pathname) && <Nav />}
     <Routes>
       <Route path='/' element={<Suspense fallback={<div>Loading...</div>}><Home /></Suspense> } />
       <Route path='/login' element={<Suspense fallback={<div>Loading...</div>}><Login /></Suspense>} />
